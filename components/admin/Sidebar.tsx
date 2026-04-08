@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export default function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export default function Sidebar({ onClose }: SidebarProps) {
   const navLinks = [
     { name: "Dashboard", href: "/admin", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
     { name: "Books", href: "/admin/books", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
@@ -10,7 +14,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-gray-900 text-white min-h-screen flex flex-col hidden md:flex">
+    <aside className="flex h-full w-64 flex-col bg-gray-900 text-white">
       <div className="p-6 border-b border-gray-800">
         <h2 className="text-xl font-bold tracking-tight">LMS Admin</h2>
       </div>
@@ -20,6 +24,7 @@ export default function Sidebar() {
             <li key={link.name}>
               <Link
                 href={link.href}
+                onClick={onClose}
                 className="flex items-center gap-3 px-6 py-3 text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
               >
                 <svg
@@ -41,12 +46,13 @@ export default function Sidebar() {
           <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-sm font-bold">
             A
           </div>
-          <div>
-            <p className="text-sm font-medium">Admin User</p>
-            <p className="text-xs text-gray-400">admin@lms.local</p>
+          <div className="truncate">
+            <p className="text-sm font-medium truncate">Admin User</p>
+            <p className="text-xs text-gray-400 truncate">admin@lms.local</p>
           </div>
         </div>
       </div>
     </aside>
   );
 }
+

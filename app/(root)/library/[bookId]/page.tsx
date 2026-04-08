@@ -97,16 +97,16 @@ const BookDetailsPage = async ({ params }: { params: { bookId: string }}) => {
           {/* Header Info */}
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent ring-1 ring-accent/20">
+              <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider text-accent ring-1 ring-accent/20">
                 {category}
               </span>
             </div>
-            <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {title}
             </h1>
-            <p className="text-xl font-bold text-secondary/80">by <span className="text-foreground">{author}</span></p>
+            <p className="text-lg md:text-xl font-bold text-secondary/80">by <span className="text-foreground">{author}</span></p>
             <div className="mt-6 max-w-3xl">
-              <p className="text-lg leading-relaxed text-secondary/90">
+              <p className="text-base md:text-lg leading-relaxed text-secondary/90">
                 {description}
               </p>
             </div>
@@ -200,7 +200,7 @@ const BookDetailsPage = async ({ params }: { params: { bookId: string }}) => {
       {similarBooksData && similarBooksData.length > 0 && (
         <section className="mt-24 space-y-10">
           <div className="flex items-center justify-between">
-            <h2 className="text-4xl font-black tracking-tight text-foreground">
+            <h2 className="text-2xl md:text-4xl font-black tracking-tight text-foreground">
               Similar <span className="text-accent">Books</span>
             </h2>
             <Link href="/library" className="group flex items-center gap-2 text-sm font-bold text-accent">

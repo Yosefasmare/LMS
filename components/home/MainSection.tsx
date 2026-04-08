@@ -10,7 +10,7 @@ const MainSection = async () => {
 
 
   return (
-     <main className="w-full flex flex-1 px-24 flex-col">
+     <main className="w-full flex flex-1 px-4 md:px-12 lg:px-24 flex-col">
         <Hero />
         <FeaturedBooks books={latestBooks}/>
       </main>

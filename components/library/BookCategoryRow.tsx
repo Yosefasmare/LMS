@@ -32,9 +32,9 @@ const BookCategoryRow = ({ title, books, viewAllLink }: BookCategoryRowProps) =>
   if (books.length === 0) return null;
 
   return (
-    <section className="group relative w-full py-6">
+    <section className="group relative w-full py-4 md:py-6">
       <div className="flex items-center justify-between px-4 sm:px-8 mb-4">
-        <h2 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">
+        <h2 className="text-lg font-bold tracking-tight text-foreground md:text-2xl">
           {title}
         </h2>
         {viewAllLink && (

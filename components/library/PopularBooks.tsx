@@ -12,15 +12,15 @@ const PopularBooks = ({ data }: PopularBooksProps) => {
   
 
   return (
-    <section className="container mx-auto px-4 py-12">
-      <div className="relative mb-10 inline-block">
-        <h2 className="relative z-10 bg-accent px-4 py-2 text-3xl font-black uppercase italic tracking-tighter text-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <section className="container mx-auto px-4 py-8 md:py-12">
+      <div className="relative mb-8 md:mb-10 inline-block">
+        <h2 className="relative z-10 bg-accent px-3 py-1.5 md:px-4 md:py-2 text-lg md:text-3xl font-black uppercase italic tracking-tighter text-white border-2 md:border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
            Popular Books
         </h2>
-        <div className="absolute -bottom-2 -right-2 h-full w-full border-4 border-black bg-white" />
+        <div className="absolute -bottom-1.5 -right-1.5 md:-bottom-2 md:-right-2 h-full w-full border-2 md:border-4 border-black bg-white" />
       </div>
 
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {data.map((book, index) => (
           <Link
             key={book.id || index}
