@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  studentId String @unique
+  firstName String
+  lastName String
+  createdAt DateTime @default(now())
+
+  reservations Reservation[]
+  borrows Borrow[]
+  
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  author      String
+  description String?
+  popularityScore Int @default(0)
+  category    String?
+  coverImage  String?
+  createdAt   DateTime @default(now())
+
+
+  soft_copy     DigitalCopy?
+  physical_copies      Copy[]
+}
+
+enum CopyStatus {
+  available
+  reserved
+  borrowed
+}
+
+model Copy {
+   @@index([bookCode])
+   
+   id String @id @default(cuid())
+   bookId String 
+   bookCode String @unique
+   status    CopyStatus @default(available)           
+
+  reservations Reservation[]
+  borrows Borrow[]
+  
+
+  book Book @relation(fields: [bookId], references: [id])
+}
+
+
+
+model DigitalCopy {
+  id        String @id @default(cuid())
+  bookId    String @unique
+  filePath   String
+  numberofDownloads Int @default(0)
+  fileType  String 
+  fileSize  Int?
+  createdAt DateTime @default(now())
+
+  book Book @relation(fields: [bookId], references: [id])
+}
+
+enum ReservationStatus {
+  active
+  collected
+  expired
+}
+
+model Reservation {
+   @@index([userId])
+  
+  id          String             @id @default(cuid())
+  code        String             @unique
+  userId      String     
+  copyId      String
+  status      ReservationStatus  @default(active)
+  expiresAt   DateTime
+  createdAt   DateTime           @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  copy Copy @relation(fields: [copyId], references: [id])
+}
+
+model Borrow {
+  @@index([userId]) // ask why we use this
+  id        String   @id @default(cuid())
+  userId    String
+  copyId    String
+  borrowedAt DateTime @default(now())
+  dueDate   DateTime
+  returned  Boolean  @default(false)
+  returnedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+  copy Copy @relation(fields: [copyId], references: [id])
+}
